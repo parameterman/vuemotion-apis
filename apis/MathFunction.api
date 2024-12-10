@@ -1,0 +1,23 @@
+This is a widget from package `@vue-motion/extension-math` api.
+
+The type is in parentheses, and the default value is in square brackets.
+
+- `x`: The position on x-coordinate, the origin is at the center of video. (`number`) [0]
+- `y`: The position on y-coordinate, the origin is at the center of video. (`number`) [0]
+- `scale-x`: The scale value on x-coordinate. (`number`) [1]
+- `scale-y`: The scale value on y-coordinate. (`number`) [1]
+- `rotation`: The rotation angle. (`number` ranges [0, 360]) [0]
+- `opacity`: The opacity value. (`number` ranges [0, 1]) [1]
+- `fn`: Mathematical function. (`(x: number) => number`)
+- `domain`: The domain of the function, that is, the range of x. (`[number, number]`)
+- `ranges`: An optional y range that controls the upper and lower limits of the drawing. (`[number, number]`) [[0,0]]
+- `division-x`: Calculate the X-axis step size. (`number`) [100]
+- `division-y`: Calculate the Y-axis step size. (`number`) [100]
+- `color`: Control the color of the graphics. (`string`) ['white']
+- `width`: Control the line width of the graph. (`number`) 
+- `fill-color`: Controls the fill color of the graph. (`string`) ["none"]
+
+Notice:
+
+- `fill-color` is not be suggested to set, because it is a function image.
+- property `domain` has a division effect on the graph, the default value of `division-x` is 100, which means the concrete length of a unit of `domain` is 100. for example if you want to draw a function that's domain is [0, 10], the concrete length will be 10 * 100 = 1000. Don't set the value overloaded otherwise it will render slowly.

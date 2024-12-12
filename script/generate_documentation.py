@@ -52,11 +52,9 @@ def generate_documentation():
         os.makedirs(output_dir)
         
     # 生成markdown文件
-    with open(os.path.join(output_dir, 'api_documentation.md'), 'w', encoding='utf-8') as f:
-        f.write('# API Documentation\n\n')
-        
+    with open(os.path.join(output_dir, 'origindata.md'), 'w', encoding='utf-8') as f:
         for api in api_contents:
-            f.write(f'## {api["file"]}\n\n')
+            f.write(f'## `{api["file"].replace(".api", "")}`\n\n')
             
             # 解析并写入文档字符串
             docs = parse_docstring(api['content'])
@@ -65,7 +63,8 @@ def generate_documentation():
             
             # 添加代码块
             f.write(api['content'])
-            f.write('\n')
-
+            f.write('\n\n')
+            f.write('---')
+            f.write('\n\n')
 if __name__ == "__main__":
     generate_documentation()

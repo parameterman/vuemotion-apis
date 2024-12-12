@@ -1,8 +1,49 @@
 This is a animation api.
 
+API:
+
 The type is in parentheses, and the default value is in square brackets.
 
 - `duration`: The duration of the animation. (`number`)
 - `by`: The timing function. (`(t: number) => number`) [t => t]
 - `offsetX`: The scale value on x-coordinate. (`number`)
 - `offsetY`: The scale value on y-coordinate. (`number`)
+
+RULES:
+
+- The animation only can be used on the widget with `scale-x` and `scale-y` property.
+- The property `offsetX` and `offsetY` is the difference between the original scale and the target scale, NOT the target scale.
+
+EXAMPLES:
+
+// Example of scaling a circle to twice its size
+<script setup>
+import { Circle } from '@vue-motion/lib'
+import { Motion } from '@vue-motion/lib'
+import { usePlayer, useWidget } from '@vue-motion/core'
+import { scale } from '@vue-motion/lib'
+import { onMounted } from 'vue'
+
+const { useAnimation, play } = usePlayer()
+const circle = useWidget()
+
+onMounted(() => {
+  useAnimation(circle)
+    .animate(scale, {
+      duration: 2,
+      offsetX: 1,  // Increase X scale by 1 (double size)
+      offsetY: 1   // Increase Y scale by 1 (double size)
+    })
+  play()
+})
+</script>
+
+<template>
+  <Motion :width="1600" :height="900">
+    <Circle 
+      :widget="circle"
+      :radius="50"
+      fill-color="blue"
+    />
+  </Motion>
+</template>

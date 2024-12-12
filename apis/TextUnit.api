@@ -21,3 +21,43 @@ The type is in parentheses, and the default value is in square brackets.
 - `decoration`: The decoration applied to the text. (`'none' | 'underline' | 'overline' | 'line-through' | 'blink'`) ['none']
 - `word-spacing`: The space between words. (`number`) [0]
 - `letter-spacing`: The space between letters. (`number`) [0]
+
+RULES:
+
+- The text content should be provided as the default slot.
+- Font properties like size, weight, and style can be combined for text formatting.
+- This component must be used in the `<Text>` component.
+
+EXAMPLES:
+
+<script setup>
+import { TextUnit } from '@vue-motion/lib'
+import { Motion } from '@vue-motion/lib'
+</script>
+
+<template>
+  <Motion :width="1600" :height="900">
+    <Text>
+      <TextUnit
+        :x="0"
+        :y="0"
+        font-size="40"
+        font-weight="bold"
+        fill-color="red"
+        align="middle"
+      >
+        Hello
+      </TextUnit>
+      <TextUnit
+        :x="0"
+        :y="0"
+        font-size="40"
+        font-weight="bold"
+        fill-color="purple"
+        align="middle"
+      >
+        Hello
+      </TextUnit>
+    </Text>
+  </Motion>
+</template>

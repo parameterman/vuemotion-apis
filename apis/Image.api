@@ -1,5 +1,7 @@
 This is a widget from package `@vue-motion/lib`.
 
+API:
+
 The type is in parentheses, and the default value is in square brackets.
 
 - `x`: The position on x-coordinate, the origin is at the center of video. (`number`) [0]
@@ -11,3 +13,28 @@ The type is in parentheses, and the default value is in square brackets.
 - `width`: The width of the rectangle. (`number`)
 - `height`: The height of the rectangle. (`number`)
 - `href`: The url of image. (`string`)
+
+RULES:
+
+- The properties `width`, `height` and `href` are required.
+- The `href` property must be a valid image URL or data URL.
+
+EXAMPLES:
+
+<script setup>
+import { Image } from '@vue-motion/lib'
+import { Motion } from '@vue-motion/lib'
+
+</script>
+
+<template>
+  <Motion :width="1600" :height="900">
+    <Image
+      :x="0"
+      :y="0"
+      :width="300"
+      :height="200"
+      href="https://example.com/image.png"
+    />
+  </Motion>
+</template>

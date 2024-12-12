@@ -1,5 +1,7 @@
 This is a widget from package `@vue-motion/lib`.
 
+API:
+
 The type is in parentheses, and the default value is in square brackets.
 
 - `x`: The position on x-coordinate, the origin is at the center of video. (`number`) [0]
@@ -18,5 +20,28 @@ The type is in parentheses, and the default value is in square brackets.
 - `cy`: The y-coordinate of the center of the ellipse. (`number`)
 - `rx`: The x-radius of the ellipse. (`number`)
 - `ry`: The y-radius of the ellipse. (`number`)
-- `width`: The width of the ellipse. (`number`)
-- `height`: The height of the ellipse. (`number`)
+
+RULES:
+
+- The properties `cx`, `cy`, `rx`, and `ry` are required.
+- The property `radius` is optional and will override `rx` and `ry` if specified.
+
+EXAMPLES:
+
+<script setup>
+import { Ellipse } from '@vue-motion/lib'
+import { Motion } from '@vue-motion/lib'
+
+</script>
+
+<template>
+  <Motion :width="1600" :height="900">
+    <Ellipse
+      :cx="0"
+      :cy="0"
+      :rx="200"
+      :ry="100"
+      fill-color="green"
+    />
+  </Motion>
+</template>

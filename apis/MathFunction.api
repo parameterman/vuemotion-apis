@@ -17,7 +17,82 @@ The type is in parentheses, and the default value is in square brackets.
 - `width`: Control the line width of the graph. (`number`) 
 - `fill-color`: Controls the fill color of the graph. (`string`) ["none"]
 
-Notice:
+RULES:
 
 - `fill-color` is not be suggested to set, because it is a function image.
 - property `domain` has a division effect on the graph, the default value of `division-x` is 100, which means the concrete length of a unit of `domain` is 100. for example if you want to draw a function that's domain is [0, 10], the concrete length will be 10 * 100 = 1000. Don't set the value overloaded otherwise it will render slowly.
+- The widget will never to be the children component of other widget (such as <NumberPlane>), if you want to use it as same, please let they to the same level.
+- The property that you need to set is `fn`, NOT `function` or `expression` or more.
+
+EXAMPLES:
+
+1. Gradually draw a function
+
+The widget must to be used with `<NumberPlane>` widge and `trace` animation.
+
+<script setup>
+import { MathFunction, NumberPlane } from '@vue-motion/extension-math'
+import { Motion, trace } from '@vue-motion/lib'
+import { usePlayer, useWidget } from '@vue-motion/core'
+import { onMounted } from 'vue'
+
+const { useAnimation, play } = usePlayer()
+
+const func = useWidget()
+onMounted(() => {
+  useAnimation(func)
+    .animate(trace, {
+      duration: 2
+    })
+  play()
+})
+</script>
+
+<template>
+  <Motion :width="1600" :height="900">
+    <NumberPlane :domain-x="[-5, 5]" :domain-y="[-5, 5]" />
+    <MathFunction :fn="x => x * x" :widget="func" />
+  </Motion>
+</template>
+
+2. Change values of some parameters to change the graph
+
+This example is to change the values of `a` and `b` to change the graph.
+
+<script setup>
+import { MathFunction, NumberPlane } from '@vue-motion/extension-math'
+import { Motion, trace } from '@vue-motion/lib'
+import { usePlayer, useWidget, defineAnimation } from '@vue-motion/core'
+import { onMounted } from 'vue'
+
+const { useAnimation, play } = usePlayer()
+
+const a = ref(1)
+const b = ref(2)
+
+const trans = defineAnimation((target, context) => {
+  return (propgress) => {
+    target.a = a.value * propgress * 10
+    target.b = b.value * propgress * 10
+  }
+})
+
+const func = useWidget()
+onMounted(() => {
+  useAnimation(func)
+    .animate(trace, {
+      duration: 2
+    })
+    .animate(trans, {
+      duration: 5
+    })
+  play()
+})
+</script>
+
+<template>
+  <Motion :width="1600" :height="900">
+    <NumberPlane :domain-x="[-5, 5]" :domain-y="[-5, 5]" />
+    <MathFunction :fn="x => a * (x - b) * (x - b)" :widget="func" />
+  </Motion>
+</template>

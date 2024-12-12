@@ -1,5 +1,7 @@
 This is a widget from package `@vue-motion/lib`.
 
+API:
+
 The type is in parentheses, and the default value is in square brackets.
 
 - `x`: The position on x-coordinate, the origin is at the center of video. (`number`) [0]
@@ -16,3 +18,29 @@ The type is in parentheses, and the default value is in square brackets.
 - `width`: The width of the rectangle. (`number`)
 - `height`: The height of the rectangle. (`number`)
 - `radius`: The radius of the rectangle's four summits. (`number`)
+
+RULES:
+
+- The property `width` and `height` is required, and the value must be a number.
+- The property `x` and `y` is the corner of left-top of the rectangle.
+
+EXAMPLES:
+
+<script setup>
+import { Rect } from '@vue-motion/lib'
+import { Motion } from '@vue-motion/lib'
+
+</script>
+
+<template>
+  <Motion :width="1600" :height="900">
+    <Rect
+      :x="0"
+      :y="0"
+      :width="200"
+      :height="100"
+      :radius="10"
+      fill-color="orange"
+    />
+  </Motion>
+</template>

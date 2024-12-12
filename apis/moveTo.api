@@ -1,5 +1,7 @@
 This is a animation api.
 
+API:
+
 The type is in parentheses, and the default value is in square brackets.
 
 - `duration`: The duration of the animation. (`number`)
@@ -8,3 +10,44 @@ The type is in parentheses, and the default value is in square brackets.
 - `fromY`: The start y-coordinate. (`number`)
 - `toX`: The end x-coordinate. (`number`)
 - `toY`: The end y-coordinate. (`number`)
+
+RULES:
+
+- The animation only can be used on the widget with `x` and `y` property.
+- The animation will be used on the widget that has the same level with the widget that you want to animate.
+
+EXAMPLES:
+
+// Example of moving a circle from one point to another
+<script setup>
+import { Circle } from '@vue-motion/lib'
+import { Motion } from '@vue-motion/lib'
+import { usePlayer, useWidget } from '@vue-motion/core'
+import { moveTo } from '@vue-motion/lib'
+import { onMounted } from 'vue'
+
+const { useAnimation, play } = usePlayer()
+const circle = useWidget()
+
+onMounted(() => {
+  useAnimation(circle)
+    .animate(moveTo, {
+      duration: 2,
+      fromX: -200,  // Starting X position
+      fromY: -200,  // Starting Y position
+      toX: 200,     // Ending X position
+      toY: 200      // Ending Y position
+    })
+  play()
+})
+</script>
+
+<template>
+  <Motion :width="1600" :height="900">
+    <Circle 
+      :widget="circle"
+      :radius="50"
+      fill-color="blue"
+    />
+  </Motion>
+</template>

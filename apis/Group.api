@@ -1,5 +1,7 @@
 This is a widget from package `@vue-motion/lib`.
 
+API:
+
 The type is in parentheses, and the default value is in square brackets.
 
 - `x`: The position on x-coordinate, the origin is at the center of video. (`number`) [0]
@@ -8,3 +10,8 @@ The type is in parentheses, and the default value is in square brackets.
 - `scale-y`: The scale value on y-coordinate. (`number`) [1]
 - `rotation`: The rotation angle. (`number` ranges [0, 360]) [0]
 - `opacity`: The opacity value. (`number` ranges [0, 1]) [1]
+
+RULES:
+
+- The widget <Group> is used when you want to group multiple widgets together.
+- The widget <Group> is not a real widget, it is just a container for other widgets. The slots will contain the children widgets.

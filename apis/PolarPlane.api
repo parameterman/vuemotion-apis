@@ -15,3 +15,28 @@ The type is in parentheses, and the default value is in square brackets.
 - `divide`: Controls how many parts of the polar coordinate plane are divided. (`number`) [20]
 - `font-size`: Font size. (`number`) 
 - `font-color`: Font color. (`string`) ['white']
+
+RULES:
+
+- The property `radius` is required and defines the size of the polar coordinate system.
+- The property `divide` controls the number of radial divisions.
+- The property `interval` controls the spacing between circular arcs.
+
+EXAMPLES:
+
+<script setup>
+import { PolarPlane } from '@vue-motion/extension-math'
+import { Motion } from '@vue-motion/lib'
+</script>
+
+<template>
+  <Motion :width="1600" :height="900">
+    <PolarPlane
+      :radius="[0, 500]"
+      :divide="12"
+      :interval="50"
+      font-color="white"
+      :font-size="20"
+    />
+  </Motion>
+</template>

@@ -1,5 +1,7 @@
 This is a widget from package `@vue-motion/lib`.
 
+API:
+
 The type is in parentheses, and the default value is in square brackets.
 
 - `x`: The position on x-coordinate, the origin is at the center of video. (`number`) [0]
@@ -15,3 +17,30 @@ The type is in parentheses, and the default value is in square brackets.
 - `border-interval`: The dash of border line. (`[number, number]`) [[1, 0]]
 - `font_family`: The font family of the text. (`string`) [""]
 - `points`: The points composing the polygon. (`Array<[number, number]>`)
+
+RULES:
+
+- The property `points` is required, and the value must be an array of points.
+- The property `x` and `y` is the original point of the coordinate system.
+
+EXAMPLES:
+
+<script setup>
+import { Polygon } from '@vue-motion/lib'
+import { Motion } from '@vue-motion/lib'
+
+</script>
+
+<template>
+  <Motion :width="1600" :height="900">
+    <Polygon
+      :points="[
+        [0, 0],
+        [100, 0],
+        [100, 100],
+        [0, 100]
+      ]"
+      fill-color="purple"
+    />
+  </Motion>
+</template>

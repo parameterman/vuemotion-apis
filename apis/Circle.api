@@ -1,5 +1,7 @@
 This is a widget from package `@vue-motion/lib`.
 
+API:
+
 The type is in parentheses, and the default value is in square brackets.
 
 - `x`: The position on x-coordinate, the origin is at the center of video. (`number`) [0]
@@ -14,3 +16,26 @@ The type is in parentheses, and the default value is in square brackets.
 - `border-offset`: The stroke offset. (`number`) [0]
 - `border-interval`: The dash of border line. (`[number, number]`) [[1, 0]]
 - `radius`: The radius of the circle. (`number`)
+
+RULES:
+
+- `radius` is required.
+
+EXAMPLES:
+
+<script setup>
+import { Circle } from '@vue-motion/lib'
+import { Motion } from '@vue-motion/lib'
+
+</script>
+
+<template>
+  <Motion :width="1600" :height="900">
+    <Circle
+      :x="0"
+      :y="0" 
+      :radius="100"
+      fill-color="red"
+    />
+  </Motion>
+</template>

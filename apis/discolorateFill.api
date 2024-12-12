@@ -1,7 +1,14 @@
 This is a animation api. The animation is used to change the fill color of the widget.
 
+API:
+
 The type is in parentheses, and the default value is in square brackets.
 
 - `duration`: The duration of the animation. (`number`)
 - `by`: The timing function. (`(t: number) => number`) [t => t]
 - `offset`: The offset value of the color, it can be RGB, RGBA, HSL, HSLA, and CSS color string. (`string`)
+
+RULES:
+
+- `offset` is required, it is the difference of the color, not the final color.
+- The animation only can be used on the widget with `fill-color` property.

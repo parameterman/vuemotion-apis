@@ -21,3 +21,22 @@ The type is in parentheses, and the default value is in square brackets.
 - `decoration`: The decoration applied to the text. (`'none' | 'underline' | 'overline' | 'line-through' | 'blink'`) ['none']
 - `word-spacing`: The space between words. (`number`) [0]
 - `letter-spacing`: The space between letters. (`number`) [0]
+
+EXAMPLES:
+
+<script setup>
+import { Text } from '@vue-motion/lib'
+import { Motion } from '@vue-motion/lib'
+
+</script>
+
+<template>
+  <Motion :width="1600" :height="900">
+    <Text 
+      :x="0"
+      :y="0"
+      font-size="40"
+      fill-color="white"
+    >Hello world!</Text>
+  </Motion>
+</template>

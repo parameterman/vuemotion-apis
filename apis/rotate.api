@@ -1,7 +1,48 @@
 This is a animation api.
 
+API:
+
 The type is in parentheses, and the default value is in square brackets.
 
 - `duration`: The duration of the animation. (`number`)
 - `by`: The timing function. (`(t: number) => number`) [t => t]
 - `offset`: The offset angle. (`number`)
+
+RULES:
+
+- The animation only can be used on the widget with `rotation` property.
+- The property `offset` is the difference between the original angle and the target angle, NOT the target angle.
+
+EXAMPLES:
+
+// Example of rotating a rectangle by 90 degrees
+<script setup>
+import { Rect } from '@vue-motion/lib'
+import { Motion } from '@vue-motion/lib'
+import { usePlayer, useWidget } from '@vue-motion/core'
+import { rotate } from '@vue-motion/lib'
+import { onMounted } from 'vue'
+
+const { useAnimation, play } = usePlayer()
+const rect = useWidget()
+
+onMounted(() => {
+  useAnimation(rect)
+    .animate(rotate, {
+      duration: 2,
+      offset: 90  // Rotate 90 degrees clockwise
+    })
+  play()
+})
+</script>
+
+<template>
+  <Motion :width="1600" :height="900">
+    <Rect 
+      :widget="rect"
+      :width="100"
+      :height="50"
+      fill-color="blue"
+    />
+  </Motion>
+</template>

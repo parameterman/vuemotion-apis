@@ -1,5 +1,7 @@
 This is a animation api.
 
+API:
+
 The type is in parentheses, and the default value is in square brackets.
 
 - `duration`: The duration of the animation. (`number`)
@@ -8,3 +10,44 @@ The type is in parentheses, and the default value is in square brackets.
 - `fromY`: The start scale on y-coordinate. (`number`)
 - `toX`: The end scale on x-coordinate. (`number`)
 - `toY`: The end scale on y-coordinate. (`number`)
+
+RULES:
+
+- The animation only can be used on the widget with `scale-x` and `scale-y` property.
+- The property `fromX` and `fromY` is the start scale on x-coordinate and y-coordinate, please let them as required.
+
+EXAMPLES:
+
+// Example of scaling a circle to specific dimensions
+<script setup>
+import { Circle } from '@vue-motion/lib'
+import { Motion } from '@vue-motion/lib'
+import { usePlayer, useWidget } from '@vue-motion/core'
+import { scaleTo } from '@vue-motion/lib'
+import { onMounted } from 'vue'
+
+const { useAnimation, play } = usePlayer()
+const circle = useWidget()
+
+onMounted(() => {
+  useAnimation(circle)
+    .animate(scaleTo, {
+      duration: 2,
+      fromX: 1,    // Starting X scale
+      fromY: 1,    // Starting Y scale
+      toX: 2,      // Target X scale
+      toY: 2       // Target Y scale
+    })
+  play()
+})
+</script>
+
+<template>
+  <Motion :width="1600" :height="900">
+    <Circle 
+      :widget="circle"
+      :radius="50"
+      fill-color="blue"
+    />
+  </Motion>
+</template>

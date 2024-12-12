@@ -1,8 +1,50 @@
 This is a animation api.
 
+API:
+
 The type is in parentheses, and the default value is in square brackets.
 
 - `duration`: The duration of the animation. (`number`)
 - `by`: The timing function. (`(t: number) => number`) [t => t]
 - `from`: The start angle. (`number`)
 - `to`: The end angle. (`number`)
+
+RULES:
+
+- The animation only can be used on the widget with `rotation` property.
+- The property `from` and `to` is the start angle and end angle, please let them as required.
+
+EXAMPLES:
+
+// Example of rotating a rectangle to a specific angle
+<script setup>
+import { Rect } from '@vue-motion/lib'
+import { Motion } from '@vue-motion/lib'
+import { usePlayer, useWidget } from '@vue-motion/core'
+import { rotateTo } from '@vue-motion/lib'
+import { onMounted } from 'vue'
+
+const { useAnimation, play } = usePlayer()
+const rect = useWidget()
+
+onMounted(() => {
+  useAnimation(rect)
+    .animate(rotateTo, {
+      duration: 2,
+      from: 0,    // Starting angle
+      to: 180     // Target angle (half rotation)
+    })
+  play()
+})
+</script>
+
+<template>
+  <Motion :width="1600" :height="900">
+    <Rect 
+      :widget="rect"
+      :width="100"
+      :height="50"
+      fill-color="blue"
+    />
+  </Motion>
+</template>

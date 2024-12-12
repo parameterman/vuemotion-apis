@@ -1,6 +1,13 @@
 This is a animation api. The `moveOnPath` animation is used to move the widget on the SVG path.
 
+API:
+
 The type is in parentheses, and the default value is in square brackets.
 
 - `duration`: The duration of the animation. (`number`)
 - `path`: The SVG path. (`string`)
+
+RULES:
+
+- The animation only can be used on the widget with `x` and `y` property.
+- The animation will be used on the widget that has the same level with the widget that you want to animate.

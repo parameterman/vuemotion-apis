@@ -1,7 +1,14 @@
 This is a animation api. The `moveOnFunction` animation is used to move the widget on the mathematical function.
 
+API:
+
 The type is in parentheses, and the default value is in square brackets.
 
 - `duration`: The duration of the animation. (`number`)
 - `by`: The timing function. (`(t: number) => number`) [t => t]
 - `path`: The function. (`(progress: number) => { x: number, y: number }`)
+
+RULES:
+
+- The animation only can be used on the widget with `x` and `y` property.
+- The animation will be used on the widget that has the same level with the widget that you want to animate.

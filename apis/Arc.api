@@ -1,5 +1,7 @@
 This is a widget from package `@vue-motion/lib`.
 
+API:
+
 The type is in parentheses, and the default value is in square brackets.
 
 - `x`: The position on x-coordinate, the origin is at the center of video. (`number`) [0]
@@ -16,3 +18,29 @@ The type is in parentheses, and the default value is in square brackets.
 - `radius`: The radius of the circle. (`number`)
 - `from`: The start angle. (`number` ranges [0, 360]) [0]
 - `to`: The end angle. (`number` ranges [0, 360]) [360]
+
+RULES:
+
+- `radius` is required.
+- `from` and `to` must be in the range of [0, 360].
+
+EXAMPLES:
+
+<script setup>
+import { Arc } from '@vue-motion/lib'
+import { Motion } from '@vue-motion/lib'
+
+</script>
+
+<template>
+  <Motion :width="1600" :height="900">
+    <Arc
+      :x="0" 
+      :y="0"
+      :radius="100"
+      :from="0"
+      :to="180"
+      fill-color="blue"
+    />
+  </Motion>
+</template>

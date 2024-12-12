@@ -1,5 +1,7 @@
 This is a widget from package `@vue-motion/extension-math` api.
 
+API:
+
 The type is in parentheses, and the default value is in square brackets.
 
 - `x`: The position on x-coordinate, the origin is at the center of video. (`number`) [0]
@@ -26,6 +28,6 @@ The type is in parentheses, and the default value is in square brackets.
 - `base-unit`: The unit of a coordinate axis. (`'number' | 'radian' | 'degree'`)
 - `y-rotation`: Control the rotation Angle of Y-axis text. (`number` ranges [0, 360]) [90]
 
-Notice:
+RULES:
 
 - property `domain-x` and `domain-y` has a division effect on the graph, the default value of `interval-x` and `interval-y` is 100, which means the concrete length of a unit of `domain` is 100. for example if you want to draw a function that's domain is [0, 10], the concrete length will be 10 * 100 = 1000. Don't set the value overloaded otherwise it will render slowly.

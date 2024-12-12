@@ -10,3 +10,30 @@ The type is in parentheses, and the default value is in square brackets.
 - `opacity`: The opacity value. (`number` ranges [0, 1]) [1]
 - `width`: The width of the rectangle. (`number`)
 - `height`: The height of the rectangle. (`number`)
+
+RULES:
+
+- The properties `width` and `height` are required.
+- This component renders a web page within the animation.
+
+EXAMPLES:
+
+<script setup>
+import { Webview } from '@vue-motion/lib'
+import { Motion } from '@vue-motion/lib'
+
+</script>
+
+<template>
+  <Motion :width="1600" :height="900">
+    <Webview
+      :x="0"
+      :y="0"
+      :width="800"
+      :height="600"
+    >
+      <div>Hello world!</div>
+    </Webview>
+  </Motion>
+</template>
+

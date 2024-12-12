@@ -1,5 +1,7 @@
 This is a animation api.
 
+API:
+
 The type is in parentheses, and the default value is in square brackets.
 
 This animation will gradually destroy the element.

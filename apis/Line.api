@@ -1,5 +1,7 @@
 This is a widget from package `@vue-motion/lib`.
 
+API:
+
 The type is in parentheses, and the default value is in square brackets.
 
 - `x`: The position on x-coordinate, the origin is at the center of video. (`number`) [0]
@@ -15,3 +17,27 @@ The type is in parentheses, and the default value is in square brackets.
 - `border-interval`: The dash of border line. (`[number, number]`) [[1, 0]]
 - `from`: The start point of the line. (`[number, number]`)
 - `to`: The end point of the line. (`[number, number]`)
+
+RULES:
+
+- The property `x` and `y` is the original point of the coordinate system.
+- The property `from` and `to` is the start point and end point of the line, please let them as required.
+
+EXAMPLES:
+
+<script setup>
+import { Line } from '@vue-motion/lib'
+import { Motion } from '@vue-motion/lib'
+
+</script>
+
+<template>
+  <Motion :width="1600" :height="900">
+    <Line
+      :from="[-100, -100]"
+      :to="[100, 100]"
+      border-color="white"
+      :border-width="2"
+    />
+  </Motion>
+</template>

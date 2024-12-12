@@ -1,5 +1,7 @@
 This is a widget from package `@vue-motion/extension-math` api.
 
+API:
+
 The type is in parentheses, and the default value is in square brackets.
 
 - `x`: The position on x-coordinate, the origin is at the center of video. (`number`) [0]
@@ -10,3 +12,28 @@ The type is in parentheses, and the default value is in square brackets.
 - `opacity`: The opacity value. (`number` ranges [0, 1]) [1]
 - `katex-options`: Configuration options to pass to katex rendering. (`katex.KatexOptions`)
 - `auto-center`: Whether the formula is automatically centered to render. (`boolean`)
+
+RULES:
+
+- The property `katex-options` is required, and the value must be a katex options.
+
+EXAMPLES:
+
+<script setup>
+import { Tex } from '@vue-motion/extension-math'
+import { Motion } from '@vue-motion/lib'
+</script>
+
+<template>
+  <Motion :width="1600" :height="900">
+    <Tex
+      :katex-options="{
+        displayMode: true,
+        throwOnError: false
+      }"
+    >
+      f(x) = \frac{1}{2\pi}\int_{-\infty}^{\infty} e^{-itx}dt
+    </Tex>
+  </Motion>
+</template>
+

@@ -12,13 +12,14 @@ class Image(Group):
         self.width = width
         self.height = height
         self.href = href
+        # self.name = 'Image'
 
 class NumberAxis(Group):
     def __init__(self, x: int, y: int, scale_x: float, scale_y: float, rotation: int, opacity: float, 
-                 base_unit: str, interval: int = 100, trend: Callable[[int], str] = lambda count: str(count), 
-                 font_size: Optional[int] = None, font_color: str = 'white', domain: Optional[Tuple[int, int]] = None, 
+                 base_unit: str=None, interval: int = 100, trend: str=None, 
+                 font_size: int = 20, font_color: str = 'white', domain: Optional[Tuple[int, int]] = [-5,5], 
                  tip: str = 'white', trim: str = 'white'):
-        super().__init__(x, y, scale_x, scale_y, rotation, opacity)
+        super(NumberAxis,self).__init__(x, y, scale_x, scale_y, rotation, opacity)
         self.base_unit = base_unit
         self.interval = interval
         self.trend = trend
@@ -27,6 +28,7 @@ class NumberAxis(Group):
         self.domain = domain
         self.tip = tip
         self.trim = trim
+        # self.name = 'NumberAxis'
 
 class NumberPlane(Group):
     def __init__(self, x: int, y: int, scale_x: float, scale_y: float, rotation: int, opacity: float, 
@@ -54,7 +56,7 @@ class NumberPlane(Group):
         self.tip_y = tip_y
         self.base_unit = base_unit
         self.y_rotation = y_rotation
-
+        # self.name = 'NumberPlane'
 
 class PolarPlane(Group):
     def __init__(self, x: int, y: int, scale_x: float, scale_y: float, rotation: int, opacity: float, 
@@ -70,6 +72,7 @@ class PolarPlane(Group):
         self.divide = divide
         self.font_size = font_size
         self.font_color = font_color
+        # self.name = 'PolarPlane'
 
 class Polygon(Group):
     def __init__(self, x: int, y: int, scale_x: float, scale_y: float, rotation: int, opacity: float, 
@@ -84,6 +87,7 @@ class Polygon(Group):
         self.border_interval = border_interval
         self.font_family = font_family
         self.points = points
+        # self.name = 'Polygon'
 
 class Tex(Group):
     def __init__(self, x: int, y: int, scale_x: float, scale_y: float, rotation: int, opacity: float, 
@@ -91,6 +95,7 @@ class Tex(Group):
         super().__init__(x, y, scale_x, scale_y, rotation, opacity)
         self.katex_options = katex_options
         self.auto_center = auto_center
+        # self.name = 'Tex'
 
 class Video(Group):
     def __init__(self, x: int, y: int, scale_x: float, scale_y: float, rotation: int, opacity: float, 
@@ -103,6 +108,7 @@ class Video(Group):
         self.loop = loop
         self.auto_play = auto_play
         self.fps = fps
+        # self.name = 'Video'
 
 class WebView(Group):
     def __init__(self, x: int, y: int, scale_x: float, scale_y: float, rotation: int, opacity: float, 
@@ -110,7 +116,7 @@ class WebView(Group):
         super().__init__(x, y, scale_x, scale_y, rotation, opacity)
         self.width = width
         self.height = height
-
+        # self.name = 'WebView'
 
 class Line(Base):
     def __init__(self, x: int, y: int, scale_x: float, scale_y: float, rotation: int, opacity: float, 
@@ -118,6 +124,7 @@ class Line(Base):
         super().__init__(x, y, scale_x, scale_y, rotation, opacity)
         self.from_ = from_
         self.to = to
+        # self.name = 'Line'
 
 class Rect(Base):
     def __init__(self, x: int, y: int, scale_x: float, scale_y: float, rotation: int, opacity: float, 
@@ -126,6 +133,7 @@ class Rect(Base):
         self.width = width
         self.height = height
         self.radius = radius
+        # self.name = 'Rect'
 
 class Text(Base):
     def __init__(self, x: int, y: int, scale_x: float, scale_y: float, rotation: int, opacity: float, 
@@ -141,6 +149,7 @@ class Text(Base):
         self.decoration = decoration
         self.word_spacing = word_spacing
         self.letter_spacing = letter_spacing
+        # self.name = 'Text'
 
 class TextUnit(Base):
     def __init__(self, x: int, y: int, scale_x: float, scale_y: float, rotation: int, opacity: float, 
@@ -156,6 +165,7 @@ class TextUnit(Base):
         self.decoration = decoration
         self.word_spacing = word_spacing
         self.letter_spacing = letter_spacing
+        # self.name = 'TextUnit'
 
 class Arc(Base):
     def __init__(self, x: int, y: int, scale_x: float, scale_y: float, rotation: int, opacity: float, 
@@ -164,12 +174,16 @@ class Arc(Base):
         self.radius = radius
         self.from_ = from_
         self.to = to
+        # self.name = 'Arc'
 
 class Circle(Base):
     def __init__(self, x: int, y: int, scale_x: float, scale_y: float, rotation: int, opacity: float, 
-                 radius: int):
+                 radius: int,cx: int, cy: int):
         super().__init__(x, y, scale_x, scale_y, rotation, opacity)
         self.radius = radius
+        self.cx = cx if cx else 0
+        self.cy = cy if cy else 0
+        # self.name = 'Circle'
 
 class Ellipse(Base):
     def __init__(self, x: int, y: int, scale_x: float, scale_y: float, rotation: int, opacity: float, 
@@ -179,6 +193,7 @@ class Ellipse(Base):
         self.cy = cy
         self.rx = rx
         self.ry = ry
+        # self.name = 'Ellipse'
 
 
 
@@ -186,18 +201,21 @@ class Rotate(AnimationBase):
     def __init__(self, duration: int,by, offset: int):
         super().__init__(duration, by)
         self.offset = offset
+        # self.name = 'Rotate'
 
 class RotateTo(AnimationBase):
     def __init__(self, duration: int, by, from_: int, to: int):
         super().__init__(duration,by)
         self.from_ = from_
         self.to = to
+        # self.name = 'RotateTo'
 
 class Scale(AnimationBase):
     def __init__(self, duration: int,by, offset_x: float, offset_y: float):
         super().__init__(duration,by)
         self.offset_x = offset_x
         self.offset_y = offset_y
+        # self.name = 'Scale'
 
 class ScaleTo(AnimationBase):
     def __init__(self, duration: int,by: object, from_x: float, from_y: float, to_x: float, to_y: float):
@@ -206,22 +224,26 @@ class ScaleTo(AnimationBase):
         self.from_y = from_y
         self.to_x = to_x
         self.to_y = to_y
+        # self.name = 'ScaleTo'
 
 class Move(AnimationBase):
     def __init__(self, duration: int,by: object, offset_x: int, offset_y: int):
         super().__init__(duration,by)
         self.offset_x = offset_x
         self.offset_y = offset_y
+        # self.name = 'Move'
 
 class MoveOnFunction(AnimationBase):
     def __init__(self, duration: int, by: object, path: Callable):
         super().__init__(duration,by)
         self.path = path
+        # self.name = 'MoveOnFunction'
 
 class MoveOnPath(AnimationBase):
     def __init__(self, duration: int,by: object, path: str):
         super().__init__(duration,by)
         self.path = path
+        # self.name = 'MoveOnPath'
 
 class MoveTo(AnimationBase):
     def __init__(self, duration: int,by: object, from_x: int, from_y: int, to_x: int, to_y: int):
@@ -230,35 +252,43 @@ class MoveTo(AnimationBase):
         self.from_y = from_y
         self.to_x = to_x
         self.to_y = to_y
+        # self.name = 'MoveTo'
 
 class Trace(AnimationBase):
     def __init__(self, duration: int , by: object):
         super().__init__(duration,by)
+        # self.name = 'Trace'
 
 class FadeIn(AnimationBase):
     def __init__(self, duration: int , by: object):
         super().__init__(duration, by)
+        # self.name = 'FadeIn'
 
 class FadeOut(AnimationBase):
     def __init__(self, duration: int, by: object):
         super().__init__(duration, by)
+        # self.name = 'FadeOut'
 
 class Grow(AnimationBase):
     def __init__(self, duration: int,by: object):
         super().__init__(duration, by)
+        # self.name = 'Grow'
 
 class FadeTo(AnimationBase):
     def __init__(self, duration: int,by: object, from_: float, to: float):
         super().__init__(duration,by)
         self.from_ = from_
         self.to = to
+        # self.name = 'FadeTo'
 
 class DiscolorateFillTo(AnimationBase):
     def __init__(self, duration: int, by: object, to: str):
         super().__init__(duration,by)
         self.to = to
+        # self.name = 'DiscolorateFillTo'
 
 class DiscolorateBorderTo(AnimationBase):
     def __init__(self, duration: int, by: object, to: str):
         super().__init__(duration, by)
         self.to = to
+        # self.name = 'DiscolorateBorderTo'

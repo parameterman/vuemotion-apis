@@ -21,7 +21,7 @@ variables_ranges_rect = {
     'radius': range(0,50,5),
 }
 
-
+string_variables = ['fill-color', 'border-color', 'base_unit', 'font_color', 'tip', 'trim']
 
 def get_instance_variable_names(instance):
     # 获取实例的属性名称
@@ -83,6 +83,11 @@ def import_vue_from_core(*args):
     statements = f"import {{ {import_statement} }} from '@vue-motion/core'\n"
     return statements
 
+def import_vue_from_extension_math(*args):
+    import_statement = ','.join(args)
+    statements = f"import {{ {import_statement} }} from '@vue-motion/extension-math'\n"
+    return statements
+
 def generate_animation_params(animation, animation_params:dict):
     # 定义生成动画参数的函数
     animation_params_str = ''
@@ -111,7 +116,10 @@ def generate_animation_script(instance_name:str,animation_name:str, animation_pa
 def generate_vue_script(name:str, animation,function_name, instance: dict,aniParams: dict):
     # 生成import语句
     arguments = []
-    
+    if name == 'NumberAxis' or name =='NamberPlane':
+        import_math = import_vue_from_extension_math(name)
+    else:
+        import_math = ''
     arguments = options_map[name].copy()
     if animation == 'scale' or animation == 'scaleTo':
         arguments.append('scale')
@@ -128,10 +136,15 @@ def generate_vue_script(name:str, animation,function_name, instance: dict,aniPar
     #生成常量声明语句
     constant_declarations = ''
     ins_name = name.lower()
-    constant_declarations += f"const {ins_name} = useWidget<{name}Ins>();\n"
+    if name == 'NumberAxis' or name =='NamberPlane':
+        constant_declarations += f"const {ins_name} = useWidget();\n"
+    else:
+        constant_declarations += f"const {ins_name} = useWidget<{name}Ins>();\n"
     for key,value in instance.items():
-        if key=='fill-color' or key=='border-color':
+        if key in string_variables:
             constant_declarations += f"const {key} = \"{value}\";\n"
+        elif key == 'domain':
+            constant_declarations += f"const {key}:[number,number] = {value};\n"
         else:
             constant_declarations += f"const {key} = {value};\n"
 
@@ -159,7 +172,7 @@ def generate_vue_script(name:str, animation,function_name, instance: dict,aniPar
     
     
     # 生成Vue代码
-    vue_script = f"<script setup lang='ts'>\n{import_vue}\n{import_lib}\n{import_core}\n{constant_declarations}\n{on_mounted} </script>\n"
+    vue_script = f"<script setup lang='ts'>\n{import_vue}\n{import_math}\n{import_lib}\n{import_core}\n{constant_declarations}\n{on_mounted} </script>\n"
     return vue_script
 
 def generate_vue_template(template_name: str, instance):
@@ -169,10 +182,10 @@ def generate_vue_template(template_name: str, instance):
     vue_template += f"  :widget=\"{template_name.lower()}\""
     for key,value in variables.items():
         if key=='fill-color' or key=='border-color':
-            vue_template += f"  {key}=\"{value}\""
+            vue_template += f"  {key}={key}"
         else:
-            vue_template += f"  :{key}=\"{value}\""
-    vue_template += f"/> \n"
+            vue_template += f"  :{key}={key}"
+    vue_template += f" /> \n"
     vue_template += f" </Motion>\n </template>\n"
     return vue_template
 
@@ -186,9 +199,14 @@ def main():
     num = 0
     for i in range(number_of_samples):
         
-        # 生成实例对象
+        # 生成拥有动画属性的对象
+        # instance = random_circle()
+        # instance = random_ellipse()
+        
 
-        rect = random_rect()
+        #数学函数扩展类，此类无不需要动画参数
+        instance = random_number_axis()
+        # rect = random_rect()
         for key,value in animation_map.items(): # 遍历动画
 
             animation_params = value  # 获取动画参数
@@ -221,8 +239,8 @@ def main():
                     params_dict['timingFunction'] = value[-1]
                 
 
-                vue_script = generate_vue_script('Rect', key,key_func, rect.get_attributes(),params_dict)
-                vue_template = generate_vue_template('Rect', rect.get_attributes())
+                vue_script = generate_vue_script(instance.get_name(), key,key_func, instance.get_attributes(),params_dict)
+                vue_template = generate_vue_template(instance.get_name(), instance.get_attributes())
                 print(vue_script)
                 print(vue_template)
                 print()
@@ -230,7 +248,7 @@ def main():
 
     print(num)
     # print(rect.get_attributes())
-    circle = Circle(x=100, y=100, scale_x=0.5, scale_y=0.5, rotation=0, opacity=1, radius=20)
+    # circle = Circle(x=100, y=100, scale_x=0.5, scale_y=0.5, rotation=0, opacity=1, radius=20)
     # print(circle.get_attributes())
     
     # animation_params = {'offsetX':100, 'offsetY':100,  'timingFunction':'easeInOutBack'}

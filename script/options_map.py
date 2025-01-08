@@ -77,3 +77,23 @@ animation_map = {
     # 'traceFill':[],
 
 }
+
+
+math_functions_map = {
+    "sqrt":  "value => Math.sqrt(value)",
+    "pow":  "value => Math.pow(value, 2)",
+    "abs":  "value => Math.abs(value)",
+    "floor":  "value => Math.floor(value)",
+    "ceil":  "value => Math.ceil(value)",
+    "round":  "value => Math.round(value)",
+    "sin":  "value => Math.sin(value)",
+    "cos":  "value => Math.cos(value)",
+    "tan":  "value => Math.tan(value)",
+    "asin":  "value => Math.asin(value)",
+    "acos":  "value => Math.acos(value)",
+    "atan":  "value => Math.atan(value)",
+    "atan2":  "value => Math.atan2(value)",
+    "log" : "(value ) =>  Math.log(value) ",
+    "exp" : "(value ) =>  Math.exp(value) ",
+    
+}
